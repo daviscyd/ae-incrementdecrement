@@ -50,12 +50,13 @@ var i = 0;
 
 // increment/decrement heavy lifting done here
 function myFunction(item, index, arr) {
-if (arr[index].name == "ShinyDing.aiff") //audio trigger file
-  {   i++ // for some stupid reason has to be done separate from setting property
+if (arr[index].name == "ShinyDing.aiff" && arr[index].comment) {
+      var multipleDing = arr[index].comment
+      i = i + Number(multipleDing); //must change comment to number or concatenation happens
       oCounter.property("Source Text").setValueAtTime(arr[index].marker.keyTime(1), (new TextDocument(i)));}
-  else if (arr[index].name == "ShinyDing.aiff" && arr[index].comment == 50){
-      i + 50; //again, has to be done separately
+   else if (arr[index].name == "ShinyDing.aiff") {
+      i++; // for some stupid reason has to be done separate from setting property
       oCounter.property("Source Text").setValueAtTime(arr[index].marker.keyTime(1), (new TextDocument(i)));}
-else if(arr[index].name == "ShinyGnid.aiff") //audio trigger file
-	{  i-- // same as i++, has to be done separately
+    else if(arr[index].name == "ShinyGnid.aiff"){
+	    i--; // same as i++, has to be done separately
         oCounter.property("Source Text").setValueAtTime(arr[index].marker.keyTime(1), (new TextDocument(i)));}
