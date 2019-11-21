@@ -32,7 +32,7 @@ oCaption.property("Position").expression =  "transform.position = [291.1, 122.4]
 var oAVLayers = [];
 // collect all Ding/Gnid audio layers.
 for (var i = 1; i <= oLayers.length; i++){
-    if (oLayers[i].hasAudio == true && (oLayers[i].name == "ShinyDing.aiff" || oLayers[i].name == "ShinyGnid.aiff" )){
+    if (oLayers[i].hasAudio == true && (oLayers[i].name == "ShinyDing.aiff" || oLayers[i].name == "ShinyGnid.aiff" || oLayers[i].name == "ShinyMultiDing.aiff")){
     oAVLayers.push(oLayers[i]);
         }else{
             continue;
@@ -50,9 +50,9 @@ var i = 0;
 
 // increment/decrement heavy lifting done here
 function myFunction(item, index, arr) {
-if (arr[index].name == "ShinyDing.aiff" && arr[index].comment) {
-      var multipleDing = arr[index].comment
-      i = i + Number(multipleDing); //must change comment to number or concatenation happens
+if (arr[index].name == "ShinyMultiDing.aiff" && arr[index].property("Marker").value.comment) {
+      var multipleDing = arr[index].property("Marker").value.comment; // when marker is brought over in PPro this is the location
+      i = i + Number(multipleDing);
       oCounter.property("Source Text").setValueAtTime(arr[index].marker.keyTime(1), (new TextDocument(i)));}
    else if (arr[index].name == "ShinyDing.aiff") {
       i++; // for some stupid reason has to be done separate from setting property
@@ -60,3 +60,4 @@ if (arr[index].name == "ShinyDing.aiff" && arr[index].comment) {
     else if(arr[index].name == "ShinyGnid.aiff"){
 	    i--; // same as i++, has to be done separately
         oCounter.property("Source Text").setValueAtTime(arr[index].marker.keyTime(1), (new TextDocument(i)));}
+}
