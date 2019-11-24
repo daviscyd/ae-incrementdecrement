@@ -26,7 +26,7 @@ var oAVLayers = [];
 // iterate through all of the composition layers, looking for audio files with specific names
 //TODO: change code to detect MultiSin variable name
 for (var i = 1; i <= oLayers.length; i++){
-    if (oLayers[i].hasAudio == true && (oLayers[i].name == "ShinyDing.aiff" || oLayers[i].name == "ShinyGnid.aiff" || oLayers[i].name == "ShinyMultiDing.aiff")){
+    if (oLayers[i].hasAudio == true && (oLayers[i].name == "ShinyDing.aiff" || oLayers[i].name == "ShinyGnid.aiff" || (oLayers[i].name).slice(0,9) == "MultiDing")){
         // add the audio files to the oAVLayers array
         oAVLayers.push(oLayers[i]); 
         }else{
@@ -46,10 +46,7 @@ var i = 0;
 // increment/decrement heavy lifting done here
 function myFunction(item, index, arr) {
  // if multiple dings occur
- //if (arr[index].name == "Multi-Ding.aiff" && arr[index].property("Marker").value.comment)
-  //TODO change code to detect MultiSin variable audio file name
-  // TODO test multiple multi ding files in sequence
-if (arr[index].name == "ShinyMultiDing.aiff" && arr[index].property("Marker").value.comment) {
+if (filenameStart.slice(0, 9) == "MultiDing" && arr[index].property("Marker").value.comment) {
      // when marker is brought over in PPro this is the location. 
      // pull marker comment and assign to variable
       var multipleDing = arr[index].property("Marker").value.comment; 
